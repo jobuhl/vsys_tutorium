@@ -6,7 +6,7 @@ import java.util.Random;
  * Created by Jojo on 30.03.17.
  * Problematik, die berechnung der zufälligen Zahlen 1 und -1 muss jedesmal neu berechnet werden
  * auf statisches Objekt syncronisieren und darauf achten das jeder Thread bei jeder iteration eine neue Zufallszahl
- * ausgibt
+ * ausgibt.
  *
  */
 public class MyThreadD extends MyAccount implements Runnable {
