@@ -19,5 +19,6 @@ public class MyAccount {
         MyAccount.number = number + b;
 
         return MyAccount.number;
+        //TEST
     }
 }
