@@ -1,4 +1,4 @@
-package ex1;
+package ex1.part1;
 
 /**
  * Created by Jojo on 29.03.17.

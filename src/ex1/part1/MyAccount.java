@@ -1,11 +1,11 @@
-package ex1;
+package ex1.part1;
 
 /**
  * Created by Jojo on 30.03.17.
  */
 public class MyAccount {
 
-    private static  int number;
+    private static int number;
 
     public static int getNumber() {
         return number;
