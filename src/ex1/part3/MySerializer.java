@@ -1,4 +1,8 @@
-import java.io.*;
+package ex1.part3;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class MySerializer {
 	private MySerializableClass mySerializableClass;

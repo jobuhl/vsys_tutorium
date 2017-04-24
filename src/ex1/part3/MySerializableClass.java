@@ -1,3 +1,5 @@
+package ex1.part3;
+
 import java.io.Serializable;
 
 public class MySerializableClass implements Serializable{
