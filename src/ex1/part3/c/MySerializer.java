@@ -1,4 +1,4 @@
-package ex1.part3.a;
+package ex1.part3.c;
 
 import java.io.*;
 
@@ -23,7 +23,7 @@ public class MySerializer {
         mySerializableClass.set(text);
         String filename = readFilename();
 
-            FileOutputStream fileOutputStream = new FileOutputStream("dummy.ser");
+            OutputStream fileOutputStream = new FileOutputStream("dummy.ser");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(mySerializableClass);
 

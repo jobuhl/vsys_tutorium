@@ -1,4 +1,4 @@
-package ex1.part3.b;
+package ex1.part3.c;
 
 import java.io.Serializable;
 
@@ -6,7 +6,7 @@ public class MySerializableClass implements Serializable {
     private static final long serialVersionUID = 1;
     private int id;
     private String string;
-    private MyNonSerializableClass myNonSerializableClass;
+    private transient MyNonSerializableClass myNonSerializableClass;
 
     MySerializableClass() {
         id = 1234;
