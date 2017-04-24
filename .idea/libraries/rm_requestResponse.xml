@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="rm.requestResponse">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../vsys_ss17_aufgabenblatt_01-aufg2-211015/rm.requestResponse.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/ex1/part2/rm.requestResponse.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

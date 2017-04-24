@@ -1,4 +1,6 @@
-package ex1.part1;
+package ex1;
+
+import java.util.concurrent.locks.Condition;
 
 /**
  * Created by Jojo on 29.03.17.
@@ -13,10 +15,13 @@ public class MyThreadC extends Thread {
 
     public void run() {
 
-        synchronized (test){
+
         while (runCount++ < 100) {
+
+
+            synchronized (test){
             syso();
-         }
+        }
         }
     }
     public void syso() {
