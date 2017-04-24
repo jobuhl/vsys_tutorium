@@ -1,4 +1,4 @@
-package ex1.part2;
+package ex1.part2.a;
 
 import rm.requestResponse.Component;
 import rm.requestResponse.Message;
