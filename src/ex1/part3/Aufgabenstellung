@@ -1,0 +1,12 @@
+a.
+ Vervollständigen Sie die Implementierung von write und read in der
+ Klasse MySerializer.
+
+b.
+ Fügen ein Objekt der Klasse MyNonSerializableClass zu
+ MySerializableClass hinzu und berücksichtigen Sie diese Instanzvariable
+ im Konstruktur und in toString. Was beobachten Sie bei der Serialisierung?
+
+c.
+ Verwenden Sie Transienz bei der MyNonSerializableClass-Instanzvariable.
+ Was beobachten Sie jetzt bei der Serialisierung und Deserialisierung?
