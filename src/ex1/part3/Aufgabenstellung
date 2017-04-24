@@ -2,11 +2,20 @@ a.
  Vervollständigen Sie die Implementierung von write und read in der
  Klasse MySerializer.
 
+ Lösung:
+ einfach die jeweiligen Streams (Output und Input) schreiben und einfügen.
+ Siehe Skript. Es darf jede art von Outputstream benutzt werden z.B. FileOutPut
+ Lösung zu sehen in MySerializer unter den Methoden read und write
+
 b.
  Fügen ein Objekt der Klasse MyNonSerializableClass zu
  MySerializableClass hinzu und berücksichtigen Sie diese Instanzvariable
  im Konstruktur und in toString. Was beobachten Sie bei der Serialisierung?
 
+ Lösung:
+
 c.
  Verwenden Sie Transienz bei der MyNonSerializableClass-Instanzvariable.
  Was beobachten Sie jetzt bei der Serialisierung und Deserialisierung?
+
+ Lösung:
