@@ -13,6 +13,9 @@ b.
  im Konstruktur und in toString. Was beobachten Sie bei der Serialisierung?
 
  Lösung:
+ Das Objekt wird für eine Serialisierung nicht erkannt und wird daher auch
+ nicht serialisiert. Will man eine serialisierung bei diesem Attribut
+ erreichen, muss man transient verwenden.
 
 c.
  Verwenden Sie Transienz bei der MyNonSerializableClass-Instanzvariable.
