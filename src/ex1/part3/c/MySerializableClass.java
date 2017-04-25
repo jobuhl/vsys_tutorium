@@ -11,6 +11,8 @@ public class MySerializableClass implements Serializable {
     MySerializableClass() {
         id = 1234;
         this.myNonSerializableClass = new MyNonSerializableClass();
+        myNonSerializableClass.toString();
+
     }
 
     public void set(String string) {
@@ -18,6 +20,9 @@ public class MySerializableClass implements Serializable {
     }
 
     public String toString() {
-        return "id: " + id + "; string: " + string;
+
+
+
+        return "id: " + id + "; string: " + string + myNonSerializableClass.toString();
     }
 }

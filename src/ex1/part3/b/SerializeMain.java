@@ -11,7 +11,7 @@ public class SerializeMain {
 	public static void main(String args[]) throws IOException, ClassNotFoundException {
 		String command,text="";
 		boolean doExit=false;
-		
+
 		myObject=new MySerializableClass();
 		mySerializer=new MySerializer(myObject);
 		

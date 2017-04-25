@@ -13,8 +13,9 @@ b.
  im Konstruktur und in toString. Was beobachten Sie bei der Serialisierung?
 
  Lösung:
- Das Objekt wird für eine Serialisierung nicht erkannt und wird daher auch
+ Das Objekt (MyNonSer) wird für eine Serialisierung nicht erkannt und wird daher auch
  nicht serialisiert.
+
 c.
  Verwenden Sie Transienz bei der MyNonSerializableClass-Instanzvariable.
  Was beobachten Sie jetzt bei der Serialisierung und Deserialisierung?

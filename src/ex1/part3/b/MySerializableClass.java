@@ -9,15 +9,17 @@ public class MySerializableClass implements Serializable {
     private MyNonSerializableClass myNonSerializableClass;
 
     MySerializableClass() {
-        id = 1234;
-        this.myNonSerializableClass = new MyNonSerializableClass();
-    }
+        this.id = 1234;
+        this.myNonSerializableClass = new MyNonSerializableClass();    }
 
     public void set(String string) {
         this.string = string;
     }
 
     public String toString() {
-        return "id: " + id + "; string: " + string;
+
+        return "id: " + id + "; string: "
+                + myNonSerializableClass.toString()
+        ;
     }
 }
