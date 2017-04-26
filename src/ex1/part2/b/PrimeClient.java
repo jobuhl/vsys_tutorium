@@ -50,7 +50,7 @@ public class PrimeClient {
 
 		} else {
 
-			System.out.println(value + " :" + "...");
+			System.out.println(value + " :" + "... ");
 
 			do {
 				m = communication.receive(port, false, true);
