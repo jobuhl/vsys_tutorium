@@ -33,7 +33,7 @@ public class MySerializer {
 
     }
 
-    public String read() throws IOException, ClassNotFoundException {
+    public String read() throws IOException, ClassNotFoundException, NullPointerException {
         String filename = readFilename();
 
         FileInputStream fileInputStream = new FileInputStream("dummy.ser");

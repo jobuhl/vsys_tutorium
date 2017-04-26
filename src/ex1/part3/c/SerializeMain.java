@@ -8,7 +8,7 @@ public class SerializeMain {
 	private static MySerializableClass myObject;
 	private static MySerializer mySerializer;
 	
-	public static void main(String args[]) throws IOException, ClassNotFoundException {
+	public static void main(String args[]) throws IOException, ClassNotFoundException, NullPointerException {
 		String command,text="";
 		boolean doExit=false;
 		
