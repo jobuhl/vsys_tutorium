@@ -1,3 +1,8 @@
+2.
+
+
+
+3.
 a.
  Vervollständigen Sie die Implementierung von write und read in der
  Klasse MySerializer.
@@ -14,7 +19,8 @@ b.
 
  Lösung:
  Das Objekt (MyNonSer) wird für eine Serialisierung nicht erkannt und wird daher auch
- nicht serialisiert.
+ nicht serialisiert, da dieser auf null gesetzt wird. Eine Lösungsmöglichkeit wäre, die
+ Non Klasse ebenfalls zu serialisieren (b_advanced).
 
 c.
  Verwenden Sie Transienz bei der MyNonSerializableClass-Instanzvariable.
