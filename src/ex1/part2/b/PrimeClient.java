@@ -31,16 +31,38 @@ public class PrimeClient {
 	
 	public void run() throws ClassNotFoundException, IOException {
 		communication=new Component();
-		for (long i=initialValue;i<initialValue+count;i++) processNumber(i);
+		for (long i=initialValue;i<initialValue+count;i++) {
+			//System.out.println("Process " + i);
+			processNumber(i);
+		}
     }
 	    
     public void processNumber(long value) throws IOException, ClassNotFoundException {
-		communication.send(new Message(hostname,port,new Long(value)),false);
-		Boolean	isPrime = (Boolean) communication.receive(port,true,true).getContent();
-	
-		System.out.println(value + ": "+(isPrime.booleanValue() ? "prime" : "not prime"));
+
+		communication.send(new Message(hostname, port, new Long(value)), true);
+		Message m = null;
+
+
+		if (requestmode.equals("syncronized")) {
+			System.out.println(value+":");
+			Boolean isPrime = (Boolean) communication.receive(port, true, true).getContent();
+			System.out.println(value + ": " + (isPrime.booleanValue() ? "prime" : "not prime"));
+
+		} else {
+
+			System.out.println(value + " :" + "...");
+
+			do {
+				m = communication.receive(port, false, true);
+			} while (m == null);
+
+			System.out.println(value + " :" + "........ " + m.getContent());
+
+		}
 	}
-	
+
+
+
 	public static void main(String args[]) throws IOException, ClassNotFoundException {
 		String hostname=HOSTNAME;
 		int port=PORT;
@@ -63,14 +85,14 @@ public class PrimeClient {
 			System.out.print("Server port ["+port+"] > ");
 			input=reader.readLine();
 			if(!input.equals("")) port=Integer.parseInt(input);
+
+			System.out.print("Request mode ["+requestmode+"] > ");
+			input=reader.readLine();
+			if(!input.equals("")) requestmode=input;
 			
 			System.out.print("Prime search initial value ["+initialValue+"] > ");
 			input=reader.readLine();
 			if(!input.equals("")) initialValue=Integer.parseInt(input);
-
-			System.out.print("Prime search count ["+requestmode+"] > ");
-			input=reader.readLine();
-			if(!input.equals("")) requestmode=input;
 
 			System.out.print("Prime search count ["+count+"] > ");
 			input=reader.readLine();

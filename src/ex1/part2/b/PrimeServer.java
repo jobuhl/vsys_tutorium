@@ -41,15 +41,15 @@ public class PrimeServer {
     	while (true) {
     		Long request=null;
 
-    		LOGGER.finer("Receiving ...");
+    		LOGGER.info("Receiving ...");
     		try {
     			request = (Long) communication.receive(port, true, false).getContent();
 			} catch (ClassNotFoundException | IOException e) {
 				e.printStackTrace();
 			}
-    		LOGGER.fine(request.toString()+" received.");
+    		LOGGER.info(request.toString()+" received.");
 
-    		LOGGER.finer("Sending ...");
+    		LOGGER.info("Sending ...");
 		    try {
 		    	communication.send(new Message("localhost",port,
 		    			new Boolean(primeService(request.longValue()))),true);
