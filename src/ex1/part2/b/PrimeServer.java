@@ -47,7 +47,7 @@ public class PrimeServer {
 			} catch (ClassNotFoundException | IOException e) {
 				e.printStackTrace();
 			}
-    		LOGGER.info(request.toString()+" received.");
+    		LOGGER.info(request.toString()+" received..");
 
     		LOGGER.info("Sending ...");
 		    try {
