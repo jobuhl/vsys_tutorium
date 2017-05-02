@@ -49,7 +49,7 @@ public class PrimeClient {
 			Boolean isPrime = (Boolean) communication.receive(port, true, true).getContent();
 			System.out.println(value + ": " + (isPrime.booleanValue() ? "prime" : "not prime"));
 
-		} else {
+		} else if (requestmode.equals("polling")){
 
 			System.out.println(value + " :" + "... ");
 
