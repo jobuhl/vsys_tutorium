@@ -1,0 +1,8 @@
+1.
+Die Primzahl muss jedesmal neu berechnet werden und dauert bei hohen Zahlen entsprechend lange
+
+2.
+Durch die synchronisierung werden anfragen erst wieder abgesendet wenn der client eine Anwort bekommen hat
+
+3.
+Mehrere Clients fragen den Server an und dieser muss diese Nacheinander beantworten
