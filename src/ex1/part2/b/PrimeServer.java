@@ -35,22 +35,21 @@ public class PrimeServer {
     	LOGGER.info("Log level set to "+level);
     }
 
-    /*fickificki*/
     void listen() {
     	LOGGER.info("Listening on port "+port);
     	
     	while (true) {
     		Long request=null;
 
-    		LOGGER.info("Receiving ...");
+    		LOGGER.finer("Receiving ...");
     		try {
     			request = (Long) communication.receive(port, true, false).getContent();
 			} catch (ClassNotFoundException | IOException e) {
 				e.printStackTrace();
 			}
-    		LOGGER.info(request.toString()+" received..");
+    		LOGGER.fine(request.toString()+" received.");
 
-    		LOGGER.info("Sending ...");
+    		LOGGER.finer("Sending ...");
 		    try {
 		    	communication.send(new Message("localhost",port,
 		    			new Boolean(primeService(request.longValue()))),true);
