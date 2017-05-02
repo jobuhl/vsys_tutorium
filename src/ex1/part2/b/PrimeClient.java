@@ -44,6 +44,8 @@ public class PrimeClient {
 		Message m = null;
 
 
+
+
 		if (requestmode.equals("syncronized")) {
 			System.out.println(value+":");
 			Boolean isPrime = (Boolean) communication.receive(port, true, true).getContent();
