@@ -28,7 +28,8 @@ public class PrimeClient {
 		this.requestmode = requestMode;
 		this.count=count;
 	}
-	
+
+	/*joachim stinkt richtig*/
 	public void run() throws ClassNotFoundException, IOException {
 		communication=new Component();
 		for (long i=initialValue;i<initialValue+count;i++) {

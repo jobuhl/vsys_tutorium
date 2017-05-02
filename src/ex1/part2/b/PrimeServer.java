@@ -35,6 +35,7 @@ public class PrimeServer {
     	LOGGER.info("Log level set to "+level);
     }
 
+    /*fickificki*/
     void listen() {
     	LOGGER.info("Listening on port "+port);
     	
