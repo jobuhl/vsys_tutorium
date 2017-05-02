@@ -5,10 +5,7 @@ Die Primzahl muss jedesmal neu berechnet werden und dauert bei hohen Zahlen ents
 Durch die synchronisierung werden anfragen erst wieder abgesendet wenn der client eine Anwort bekommen hat
 
 3.
-Mehrere Clients fragen den Server an und dieser muss diese Nacheinander beantworten
+Serverseitig wird nur mit einem Thread gearbeitet, daher keine Nebenläufigkeit
 
 4.
-Serverseitig wird nur mit einem Thread gearbeitet
-
-5.
-Latenz
+Latenz bei der Übertagung von Client -> Server und Server -> Clients
