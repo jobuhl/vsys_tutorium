@@ -43,19 +43,39 @@ public class PrimeClient {
 		communication.send(new Message(hostname, port, new Long(value)), true);
 		Message m = null;
 
+		/*class Threadi extends Thread {
+			public void run() {
+
+
+			}
+
+		}*/
+
 
 		if (requestmode.equals("syncronized")) {
-			System.out.println(value+":");
+
+			//System.out.println(value+":");
 			Boolean isPrime = (Boolean) communication.receive(port, true, true).getContent();
 			System.out.println(value + ": " + (isPrime.booleanValue() ? "prime" : "not prime"));
 
-		} else {
+		} else if(requestmode.equals("polling")) {
 
 			System.out.println(value + " :" + "... ");
 
 			do {
 				m = communication.receive(port, false, true);
 			} while (m == null);
+
+			Boolean isPrime = (Boolean) m.getContent();
+			System.out.println(value + " :" + "........ " + (isPrime.booleanValue() ? "prime" : "not prime"));
+
+		} else {
+
+			//new Threadi().start();
+			System.out.println(value + " :" + "... ");
+			do {
+				m = communication.receive(port, true, true);
+			} while(m==null);
 
 			Boolean isPrime = (Boolean) m.getContent();
 			System.out.println(value + " :" + "........ " + (isPrime.booleanValue() ? "prime" : "not prime"));
