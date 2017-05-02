@@ -6,3 +6,9 @@ Durch die synchronisierung werden anfragen erst wieder abgesendet wenn der clien
 
 3.
 Mehrere Clients fragen den Server an und dieser muss diese Nacheinander beantworten
+
+4.
+Serverseitig wird nur mit einem Thread gearbeitet
+
+5.
+Latenz

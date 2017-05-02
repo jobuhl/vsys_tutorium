@@ -57,7 +57,8 @@ public class PrimeClient {
 				m = communication.receive(port, false, true);
 			} while (m == null);
 
-			System.out.println(value + " :" + "........ " + m.getContent());
+			Boolean isPrime = (Boolean) m.getContent();
+			System.out.println(value + " :" + "........ " + (isPrime.booleanValue() ? "prime" : "not prime"));
 
 		}
 	}
