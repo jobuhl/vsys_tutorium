@@ -55,7 +55,7 @@ public class MySocketClient {
 		t2.start();
 
 		while(!quit) {
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 			System.out.println("Client: send "+message);
 		}
 
