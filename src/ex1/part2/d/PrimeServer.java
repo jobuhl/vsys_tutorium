@@ -22,6 +22,7 @@ public class PrimeServer {
 //    	setLogLevel(Level.FINER);
     }
 
+
     private boolean primeService(long number) {
 		for (long i = 2; i < Math.sqrt(number)+1; i++) {
 		    if (number % i == 0) return false;

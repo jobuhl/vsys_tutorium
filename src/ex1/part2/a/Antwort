@@ -9,3 +9,12 @@ Serverseitig wird nur mit einem Thread gearbeitet, daher keine Nebenläufigkeit
 
 4.
 Latenz bei der Übertagung von Client -> Server und Server -> Clients
+
+
+
+/**
+ * 3 Ursachen: (1): lange Berechnungszeit (2): nur sequenzielle Berechnung
+ * möglich (blockierender Modus) (3): weil SingleThreaded (keine nebenläufige
+ * Berechnung möglich)
+ *
+ */
