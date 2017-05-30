@@ -1,6 +1,5 @@
 package ex2.part1;
 
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
