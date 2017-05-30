@@ -8,10 +8,10 @@ public class ClientMain {
 	private static final String hostname = "localhost";
 	private static BufferedReader reader;
 	private static String clientName;
-	private static boolean input = true;
+	private static boolean breaking = true;
 
-	public static void inputSet() {
-		input = false;
+	private static void setFalse() {
+		breaking = false;
 	}
 
 	public static void main(String args[]) {
@@ -28,6 +28,7 @@ public class ClientMain {
 		// jeder Input startet einen Thread nummer wird pro aufruf itteriert
 		int counter = 0;
 
+		//Interne Klasse für jeden Thread der die Abbruchbedingung abhandelt
 		Thread thread = new Thread(new Runnable(){
 			private BufferedReader reader;
 
@@ -45,21 +46,21 @@ public class ClientMain {
 					}
 
 					if (read.equals("stop")) {
-						ClientMain.inputSet();
-						System.out.println("---Wurde abgebrochen---");
-						break;
+						ClientMain.setFalse();
+						System.out.println("---Request will be stoped---");
+						Thread.currentThread().stop();
 					}
 				}
 			}
 		});
 		thread.start();
 
-		// MESSAGE THREADS
-		while (input) {
+		//solange stop nicht eingegeben wird -> anfrage an server
+		while (breaking) {
 			try {
-				Thread t = new Thread(new MySocketClient(hostname, port, clientName + "-" + counter));
-				t.start();
-				t.sleep((int)(Math.random() * 10000));
+				Thread thread1 = new Thread(new MySocketClient(hostname, port, clientName + "-" + counter));
+				thread1.start();
+				thread1.sleep((int)(Math.random() * 10000));
 			} catch (IOException | InterruptedException e) {		
 				e.printStackTrace();
 			}
