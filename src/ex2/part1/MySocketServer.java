@@ -16,7 +16,9 @@ public class MySocketServer {
 			try {
 				System.out.println("Server: listening on port " + port);
 				Socket incomingConnection = socket.accept();
-				MySocketServerConnection connection = new MySocketServerConnection(incomingConnection); //Erstelle für jede eingehende Verbindung einen eigenen Thread
+
+				//Erstelle für jede eingehende Verbindung einen eigenen Thread
+				MySocketServerConnection connection = new MySocketServerConnection(incomingConnection);
 				connection.start();
 			} catch (IOException e) {
 				e.printStackTrace();

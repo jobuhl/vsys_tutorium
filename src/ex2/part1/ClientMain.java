@@ -25,8 +25,9 @@ public class ClientMain {
 			e.printStackTrace();
 		}
 
-		// jeder Input startet einen Thread
+		// jeder Input startet einen Thread nummer wird pro aufruf itteriert
 		int counter = 0;
+
 		Thread thread = new Thread(new Runnable(){
 			private BufferedReader reader;
 

@@ -14,10 +14,14 @@ public class MySocketClient implements Runnable {
 		System.out.print("Client: connecting '" + hostname + "' on " + port + " ... ");
 		socket.connect(new InetSocketAddress(hostname, port));
 		System.out.println("done.");
-		objectInputStream = new ObjectInputStream(socket.getInputStream()); //Das was des Socket erh�lt
-		objectOutputStream = new ObjectOutputStream(socket.getOutputStream()); //Das was des Socket sendet
+
+		//gibt aus was der Server zurück sendet
+		objectInputStream = new ObjectInputStream(socket.getInputStream());
+		//gibt aus was zum Server  gesendet wird
+		objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
 	}
 
+	//Methode zum empfangen und senden
 	public String sendAndReceive(String message) throws Exception {
 		objectOutputStream.writeObject(message); // SENDE Message
 		System.out.println("Client: send " + message);
@@ -33,7 +37,7 @@ public class MySocketClient implements Runnable {
 	}
 
 	@Override
-	public void run() { // METHODE f�r den Thread
+	public void run() { // METHODE für den Thread
 		try {
 			sendAndReceive(message); //Sende Message
 			disconnect();	//Disconnect
