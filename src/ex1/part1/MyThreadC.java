@@ -1,4 +1,3 @@
-package ex1;
 
 import java.util.concurrent.locks.Condition;
 
@@ -27,7 +26,7 @@ public class MyThreadC extends Thread {
     public void syso() {
 
         try {
-            Thread.currentThread().sleep(100);
+            Thread.currentThread().sleep(10);
             System.out.println(runCount + ": " + Thread.currentThread().getName());
         } catch (InterruptedException e) {
             e.printStackTrace();

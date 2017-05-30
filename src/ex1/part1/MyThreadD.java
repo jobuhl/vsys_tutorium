@@ -40,6 +40,8 @@ public class MyThreadD extends MyAccount implements Runnable {
 
         if (b == 0) {
             b = -1;
+        } else {
+            b = 1;
         }
 
 

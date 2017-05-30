@@ -16,7 +16,11 @@ public class ClientMain {
 			System.out.print("Client: Enter name> ");
 			reader=new BufferedReader(new InputStreamReader(System.in ));
 			String clientName=reader.readLine();
+
 			System.out.println(client.sendAndReceive(clientName));
+
+
+
 			client.disconnect();
 		}
 		catch(Exception e) {

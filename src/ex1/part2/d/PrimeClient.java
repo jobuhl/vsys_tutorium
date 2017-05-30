@@ -70,7 +70,7 @@ public class PrimeClient {
 			Boolean isPrime = (Boolean) communication.receive(port, true, true).getContent();
 			System.out.print((isPrime.booleanValue() ? "prime\n" : "not prime\n"));
 
-		} else if (requestmode.equals("polling")){
+		} else if (requestmode.equals("polling")){ //blockierend
 
 			System.out.print(value + " :" + "...");
 			Threadi x = new Threadi();
@@ -84,8 +84,7 @@ public class PrimeClient {
 			x.setEnde(true);
 			System.out.print((isPrime.booleanValue() ? " prime\n" : " not prime\n"));
 
-		} else if(requestmode.equals("block2")) {
-
+		} else if(requestmode.equals("block2")) { //blockiernd aber nebenläufig
 			System.out.print(value + " :" + "...");
 			Threadi t = new Threadi();
 			t.start();

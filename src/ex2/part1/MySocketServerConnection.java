@@ -1,12 +1,13 @@
 package ex2.part1;
 import java.io.*;
 import java.net.*;
- 
+import java.util.Scanner;
+
 public class MySocketServerConnection extends Thread {
 	private Socket socket;
 	private ObjectInputStream objectInputStream;
 	private ObjectOutputStream objectOutputStream;
-	
+
 	public MySocketServerConnection(Socket socket) 
 					throws IOException {
 		this.socket=socket;
@@ -18,14 +19,27 @@ public class MySocketServerConnection extends Thread {
 	}
 	
 	public void run() {
-		System.out.println("Server: waiting for message ...");	
-		
+		System.out.println("Server: waiting for message ...");
+
+
+
+
 		try {
-			String string=(String)objectInputStream.readObject();
-			System.out.println("Server: received '"+string+"'");	
-			objectOutputStream.writeObject("server received "+string);
-			
-			socket.close();
+
+			if (objectOutputStream != null) {
+				String string=(String)objectInputStream.readObject();
+				System.out.println("Server: received '"+string+"'");
+				objectOutputStream.writeObject("server received "+string);
+
+
+			} else {
+				System.out.println("TEST ELSE");
+				socket.close();
+
+			}
+
+
+
 		}
 		catch(Exception e) {
 			e.printStackTrace();

@@ -26,7 +26,6 @@ public class MySocketClient {
 	public String sendAndReceive(String message) throws Exception {
 
 
-		objectOutputStream.writeObject(message);
 
 
 
@@ -54,14 +53,21 @@ public class MySocketClient {
 
 		t2.start();
 
+
+
+		int i = 1;
 		while(!quit) {
+
 			Thread.sleep(3000);
-			System.out.println("Client: send "+message);
+			objectOutputStream.writeObject(message+"-"+i);
+			System.out.println("Client: send " +message +"-" +i);
+			i++;
+
 		}
 
 
 		return "Client: received '"
-			+(String)objectInputStream.readObject()+"'";
+				+(String)objectInputStream.readObject()+"'";
 
 
 	}

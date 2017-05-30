@@ -22,6 +22,7 @@ public class MyThreadB extends Thread {
 
     public synchronized void syso() {
 
+
         System.out.println(runCount + ": " + Thread.currentThread().getName());
 
         try {

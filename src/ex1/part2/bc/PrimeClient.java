@@ -45,8 +45,6 @@ public class PrimeClient {
 
 		/*class Threadi extends Thread {
 			public void run() {
-
-
 			}
 
 		}*/
@@ -62,14 +60,20 @@ public class PrimeClient {
 
 		} else if(requestmode.equals("polling")) {
 
-			System.out.println(value + " :" + "... ");
+			System.out.print(value + " :" + "...");
 
 			do {
+				System.out.print(".");
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException ec) {
+					ec.printStackTrace();
+				}
 				m = communication.receive(port, false, true);
 			} while (m == null);
 
 			Boolean isPrime = (Boolean) m.getContent();
-			System.out.println(value + " :" + "........ " + (isPrime.booleanValue() ? "prime" : "not prime"));
+			System.out.print((isPrime.booleanValue() ? "prime\n" : "not prime\n"));
 
 		} else {
 
