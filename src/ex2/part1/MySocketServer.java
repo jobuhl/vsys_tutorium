@@ -20,6 +20,10 @@ public class MySocketServer {
 				MySocketServerConnection connection=
 					new MySocketServerConnection(incomingConnection);
 				connection.start();
+
+				System.out.println("Socket-Adresse: "
+						+ incomingConnection.getInetAddress() + " Port:"
+						+ incomingConnection.getPort());
 			}
 			catch(IOException e) {
 				e.printStackTrace();
