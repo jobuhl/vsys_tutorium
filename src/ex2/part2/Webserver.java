@@ -15,37 +15,36 @@ public class Webserver {
 
 	public static void main(String[] args) throws IOException {
 		
-		System.out.println("Starting Webserver Hardcoded Answer");
+		System.out.println("Starting Webserver");
 
-		int port = 0;
-		String filename = null;
-		Scanner myS = new Scanner(System.in);
+		int port = 1234;
+		String filename = "";
+		Scanner scanner = new Scanner(System.in);
 
 		System.out.println("Enter Port: ");
-		port = myS.nextInt();
+		port = scanner.nextInt();
 		System.out.println("Enter Log Filename: ");
-		filename = myS.next();
+		filename = scanner.next();
 
 		ServerSocket serverSocket = new ServerSocket(port);
 		System.err.println("Server started on Port : " + port);
 
+
 		while (true) {
 
+			System.out.println("Server: listening on port " + port);
 			Socket clientSocket = serverSocket.accept();
 			System.err.println("New connection");
 
-			// BR wird f�r die Infos die zB der Webserver schickt ben�tigt um zu
-			// loggen
-			BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-			// BW wird ben�tigt um auf der Website was anzuzeigen
-			BufferedWriter out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
+			BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+			BufferedWriter output = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
 
 			String s;
 			Writer fw = null;
 
 			fw = new FileWriter(filename, true);
 
-			while ((s = in.readLine()) != null) {
+			while ((s = input.readLine()) != null) {
 				try {
 					System.out.println(s);
 					fw.write(s);
@@ -60,14 +59,12 @@ public class Webserver {
 					break;
 				}
 			}
-			out.write("HTTP/1.0 200 OK\r\n\r\n<html><body><h1>Hallo Web-Welt</h1></body></html>");
+			output.write("HTTP/1.0 200 OK\r\n\r\n<html><body><h1>Hallo Web-Welt</h1></body></html>");
 
 			System.err.println("Connection lost");
 			fw.close();
-			out.close();
-			in.close();
-
-			//clientSocket.close();
+			output.close();
+			input.close();
 		}
 		
 	}
