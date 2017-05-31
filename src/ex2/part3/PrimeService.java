@@ -23,7 +23,7 @@ public class PrimeService extends Thread {
     public void run() {
         isPrime = primeService();
         try {
-            communication.send(new Message("localhost", port, isPrime), port, true);
+            communication.send(new Message("localhost", port, isPrime), true);
         } catch (IOException e) {
             e.printStackTrace();
         }

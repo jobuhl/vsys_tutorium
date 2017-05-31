@@ -43,7 +43,7 @@ public class PrimeClient extends Thread {
         Boolean blocking = false;
         Boolean isNull = false;
 
-        communication.send(new Message(hostname, port, new Long(value)), port, true);
+        communication.send(new Message(hostname, port, new Long(value)), true);
 
         System.out.print(CLIENT_NAME + " " + value + " ");
 
