@@ -26,7 +26,7 @@ public class MySocketServerConnection extends Thread {
 		try {
 			boolean error = false;
 			String in;
-			String path = "C:\\Users\\Micha\\Desktop\\HTWG\\6. Semester\\Verteilte Systeme\\Übungen\\vsys_aufgabenblatt_02-aufgabe_01";
+			String path = "/Users/Jojo/Library/Mobile Documents/com~apple~CloudDocs/htwg/sem5/VSYS/vsys_tutorium/src/ex2/";
 			String url;
 			Boolean validURL = false;
 			output.println("HTTP/1.1 200 OK");
