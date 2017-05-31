@@ -1,105 +1,169 @@
 package ex2.part3;
-import java.io.BufferedReader;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.logging.*;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import rm.requestResponse.*;
+import ex2.part4.Component;
+import ex2.part4.Message;
 
-public class PrimeServer extends Thread {
-	private final static int PORT=1234;
-	private final static Logger LOGGER=Logger.getLogger(PrimeServer.class.getName());
-    private static Boolean fixedThreadPool = true;
 
+public class PrimeServer implements Runnable {
+	private final static int PORT = 1234, POOLSIZE = 10;
+	private final static Logger LOGGER = Logger.getLogger(PrimeServer.class.getName());
 	private Component communication;
-	private int port = PORT;
-	protected static ThreadCounter counter;
-	private ExecutorService exec;
-	protected static Object obj;
+	private int port = PORT, requestzaehler, anzahlAnfragen = 20, portcounter = 0;
 
-    public PrimeServer(int port, Boolean fixed) {
-    	obj = new Object();
-        counter = new ThreadCounter(obj);
-        counter.start();
-    	communication = new Component();
-    	fixedThreadPool = fixed;
-    	if(port>0) this.port=port;
-//    	setLogLevel(Level.FINER);
-    }
+//	static ExecutorService executor = Executors.newFixedThreadPool(POOLSIZE);
+//	static ExecutorService executor = Executors.newCachedThreadPool();
+	static ExecutorService executor;
 
-    public void run() {
-    	listen();
+
+	PrimeServer(int port) {
+		communication = new Component();
+		if (port > 0)
+			this.port = port;
 	}
 
+	private boolean primeService(long number) {
+		for (long i = 2; i < Math.sqrt(number) + 1; i++) {
+			if (number % i == 0)
+				return false;
+		}
+		return true;
+	}
+
+	@SuppressWarnings("static-access")
 	void setLogLevel(Level level) {
-    	for(Handler h : LOGGER.getLogger("").getHandlers())	h.setLevel(level);
-    	LOGGER.setLevel(level);
-    	LOGGER.info("Log level set to "+level);
-    }
+		for (Handler h : LOGGER.getLogger("").getHandlers())
+			h.setLevel(level);
+		LOGGER.setLevel(level);
+		LOGGER.info("Log level set to " + level);
+	}
 
-    void listen() {
+	/**
+	 * Method is called in the beginning to initialize new incoming connections
+	 * and give them a port.
+	 */
+	void listen() {
+		LOGGER.info("Listening on port " + port + " -> von Thread: " + Thread.currentThread().getName());
 
-    	LOGGER.info("Listening on port "+port);
+		while (true) {
+			LOGGER.finer("Receiving ...");
+			try {
+				communication.receive(port, true, false);
+				//setzt port counter hoch wenn port eingang hat
+				portcounter++;
 
-    	while (true) {
-    		Long request=null;
-
-    		LOGGER.finer("Receiving ...");
-    		try {
-    		    request = (Long) communication.receive(port, true, true).getContent();
-    			System.out.println("Request: " + request);
+				//sendet message mit neuem port für client
+				communication.send(new Message("localhost", port, new Integer(port + portcounter)), port, true);
 			} catch (ClassNotFoundException | IOException e) {
 				e.printStackTrace();
 			}
 
-			synchronized (obj) {
-    			obj.notify();
-    			counter.increment();
-			}
-    		LOGGER.fine(request.toString()+" received.");
+			//für jeden client neuen primeserver mit neuem port siehe oben
+			executor.execute(new PrimeServer(port + portcounter));
+		}
+	}
 
-    		LOGGER.finer("Sending ...");
-    		if(fixedThreadPool) {
-    		    exec = Executors.newFixedThreadPool(10);
-            } else {
-    		    exec = Executors.newCachedThreadPool();
-            }
-            PrimeService ps = new PrimeService(request.longValue(), port, communication);
-    		exec.execute(ps);
-    	}
-    }
+	/**
+	 * Method is used when a connection was set for a new port to run the Prime
+	 * Search Threadbased on server.
+	 */
+	public void run() {
+		requestzaehler = 0;
 
-    public static void main(String[] args) {
-    	int port=0;
-    	for (int i = 0; i<args.length; i++)  {
-			switch(args[i]) {
-				case "-port":
-					try {
-				        port = Integer.parseInt(args[++i]);
-				    } catch (NumberFormatException e) {
-				    	LOGGER.severe("port must be an integer, not "+args[i]);
-				        System.exit(1);
-				    }
-					break;
-				default:
-					LOGGER.warning("Wrong parameter passed ... '"+args[i]+"'");
+		//nimmt aktuellen aufrufenden thread
+		LOGGER.info("Listening on port " + port + " -> von Thread: " + Thread.currentThread().getName());
+
+		while (true) {
+			Long request = null;
+
+			if (requestzaehler == anzahlAnfragen) {
+				try {
+
+					//cleanup gibt den port wieder frei
+					communication.cleanup();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				break;
 			}
-        }
-        String input = "";
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.print("FixedThreadPool [true] > ");
-        try {
-            input = reader.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if (!input.equals("")) {
-            if(!input.equals("true")) {
-                fixedThreadPool = false;
-            }
-        }
-    	new PrimeServer(port, fixedThreadPool).run();
-    }
+			requestzaehler++;
+
+			LOGGER.finer("Receiving ...");
+			try {
+				request = (Long) communication.receive(port, true, false).getContent();
+			} catch (ClassNotFoundException | IOException e) {
+				e.printStackTrace();
+			}
+
+			LOGGER.fine(request.toString() + " received.");
+
+			LOGGER.finer("Sending ...");
+			try {
+
+				//berechent primzahl und sendet direkt nachricht an client
+				communication.send(new Message("localhost", port, new Boolean(primeService(request.longValue()))), port,
+						true);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			LOGGER.finer("message sent.");
+
+		}
+		LOGGER.info(Thread.currentThread().getName() + " ist nun fertig auf port " + port);
+	}
+
+	public static void main(String[] args) {
+		//pool selection
+		boolean end = false;
+		Scanner eingabe = new Scanner(System.in);
+		while(!end) {
+			System.out.println("Select The Pool You Want:"
+					+ "\n1: Cached Thread Pool"
+					+ "\n2: Fixed Thread Pool [Length: " + POOLSIZE + "]");
+			
+			switch(eingabe.nextLine()) {
+			case "1": 
+				executor = Executors.newCachedThreadPool();
+				end = true;
+				break;
+			case "2":
+				executor = Executors.newFixedThreadPool(POOLSIZE);
+				end = true;
+				break;
+			default:
+				System.err.println("Inputerror: Please provide a correct value!");
+			}
+		}
+		eingabe.close();
+		
+		int port = 0;
+
+		for (int i = 0; i < args.length; i++) {
+			switch (args[i]) {
+			case "-port":
+				try {
+					port = Integer.parseInt(args[++i]);
+				} catch (NumberFormatException e) {
+					LOGGER.severe("port must be an integer, not " + args[i]);
+					System.exit(1);
+				}
+				break;
+			default:
+				LOGGER.warning("Wrong parameter passed ... '" + args[i] + "'");
+			}
+		}
+		
+		//aufgabe d
+		new ThreadCounter().start();
+
+		// primeserver wird port zugewiesen, mit listen wegen der Schleife
+		new PrimeServer(port).listen();
+	}
 }

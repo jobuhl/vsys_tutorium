@@ -1,38 +1,29 @@
 package ex2.part3;
 
-/**
- * Created by MB_SP on 29.05.2017.
- */
 public class ThreadCounter extends Thread {
 
-    private int counter = 0;
-    private Object sth;
-    protected boolean running = true;
+	int aktuelleZahl = 0;
+	int gezaehlt;
+	Thread th[] = new Thread[5];
 
-    public ThreadCounter(Object obj) {
-        this.sth = obj;
-    }
+	public void run() {
+		while (true) {
+			gezaehlt = Thread.activeCount();
 
-    public void run() {
-        while (running) {
-            synchronized (sth) {
-                try {
-                    sth.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+			if (aktuelleZahl != gezaehlt) {
+				System.out.println("Threadcounter: " + gezaehlt + " Threads.");
+				aktuelleZahl = gezaehlt;
+				
+				// returns the number of threads put into the array
+				Thread.enumerate(th);
 
-            }
-        }
-    }
+				// prints active threads
+				for (int i = 0; i < 5; i++) {
+					System.out.println(i + ": " + th[i]);
+				}
 
-    public void increment() {
-        this.counter++;
-        System.out.println("THREADS: " + this.counter);
-    }
+			}
+		}
 
-    public void decrement() {
-        this.counter--;
-        System.out.println("THREADS: " + this.counter);
-    }
+	}
 }
