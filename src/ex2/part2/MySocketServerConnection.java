@@ -26,7 +26,7 @@ public class MySocketServerConnection extends Thread {
 		try {
 			boolean error = false;
 			String in;
-			String path = "/Users/Jojo/Library/Mobile Documents/com~apple~CloudDocs/htwg/sem5/VSYS/vsys_tutorium/src/ex2/";
+			String path = "/Users/Jojo/Library/Mobile Documents/com~apple~CloudDocs/htwg/sem5/VSYS/vsys_tutorium/src/ex2/test";
 			String url;
 			Boolean validURL = false;
 			output.println("HTTP/1.1 200 OK");
@@ -56,11 +56,11 @@ public class MySocketServerConnection extends Thread {
 				filereader.close();
 			} else if(!validURL) {
 				output.println("<h1>Error 400: Bad Request</h1>");
-				output.println("<p>Hier könnte Ihre Werbung stehen!</p>");
+				output.println("<p>Hier koennte Ihre Werbung stehen!</p>");
 				serverlog.println("Error 400 - Bad Request.");
 			} else {
 				output.println("<h1>Error 404: Page with url " + url + " not found!</h1>");
-				output.println("<p>Hier könnte Ihre Werbung stehen!</p>");
+				output.println("<p>Hier koennte Ihre Werbung stehen!</p>");
 				serverlog.println("Error 404 - Seite konnte nicht gefunden werden.");
 				output.println();
 			}
