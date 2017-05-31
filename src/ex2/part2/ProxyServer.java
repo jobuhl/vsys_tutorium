@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public class HTTPServer {
+public class ProxyServer {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws Exception {
 
