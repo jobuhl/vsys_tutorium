@@ -41,24 +41,24 @@ public class HTTPServer {
 																// Zeichen 5
 				String getRequest = get[0];
 				String regex = "[-a-zA-Z0-9+&@#%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
-				
-				
-				//UrlValidator urlValidator = new UrlValidator();
 
 				boolean bad_request = Pattern.matches(regex, getRequest);
-				System.out.println("REGEX"+bad_request);
+				System.out.println("REGEX: "+bad_request);
 
+				System.out.println(getRequest);
+				System.out.println(bad_request);
 				if (bad_request) {
 
 					try {
-						BufferedReader read = new BufferedReader(new FileReader(getRequest + ".html"));
+
+						BufferedReader read = new BufferedReader(new FileReader("/Users/Jojo/Library/Mobile Documents/com~apple~CloudDocs/htwg/sem5/VSYS/vsys_tutorium/src/ex2/part2/"+getRequest + ".html"));
 						content = read.readLine();
 					} catch (FileNotFoundException ex) {
-						BufferedReader read = new BufferedReader(new FileReader("404.html"));
+						BufferedReader read = new BufferedReader(new FileReader("/Users/Jojo/Library/Mobile Documents/com~apple~CloudDocs/htwg/sem5/VSYS/vsys_tutorium/src/ex2/part2/404.html"));
 						content = read.readLine();
 					}
 				} else {
-					BufferedReader read = new BufferedReader(new FileReader("/Users/Jojo/Library/Mobile Documents/com~apple~CloudDocs/htwg/sem5/VSYS/vsys_tutorium/src/ex2/part2/test.html"));
+					BufferedReader read = new BufferedReader(new FileReader("/Users/Jojo/Library/Mobile Documents/com~apple~CloudDocs/htwg/sem5/VSYS/vsys_tutorium/src/ex2/part2/badrequest.html"));
 					content = read.readLine();
 				}
 				String httpResponse = "HTTP/1.1 200 OK\r\n\r\n" + content;
