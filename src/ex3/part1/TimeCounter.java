@@ -5,9 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TimeCounter {
-    private ArrayList<Long> communicationTimes;
+
     private ArrayList<Long> processingTimes;
     private ArrayList<Long> waitingTimes;
+    private ArrayList<Long> communicationTimes;
+
 
     public TimeCounter(){
         communicationTimes = new ArrayList();

@@ -106,9 +106,10 @@ public class PrimeClient{
         long wAvg = avgs.get("wt");
         long cAvg = avgs.get("ct");
 
-        String outputMsg = "processing time: " + p + "ms | (" + pAvg + ")\n" +
-                           "waiting time: " + w + "ms | (" + wAvg + ")\n" +
-                            "communication time: " + c + "ms | (" + cAvg + ")\n" +
+        String outputMsg = "\n"+
+                "p: " + p + "ms | (" + pAvg + ")\n" +
+                           "w: " + w + "ms | (" + wAvg + ")\n" +
+                            "c: " + c + "ms | (" + cAvg + ")\n" +
                            "isprime: " + receivedData.get("isprime") + "\n";
 
         return outputMsg;

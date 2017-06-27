@@ -32,7 +32,7 @@ public class PrimeClient extends Thread {
 	private Component communication;
 	String hostname;
 	int port;
-	int commport;
+	int portin;
 	long initialValue, count;
 	boolean requestMode;
 	boolean blocking;
@@ -52,7 +52,7 @@ public class PrimeClient extends Thread {
 		// erhalten
 		try {
 			communication.send(new Message(hostname, port, new Boolean(true)), port, true);
-			commport = (Integer) communication.receive(port, true, true).getContent();
+			portin = (Integer) communication.receive(port, true, true).getContent();
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -76,7 +76,7 @@ public class PrimeClient extends Thread {
 
 		// Client kann nun die Startzahl zur Primzahlberechnung senden auf dem
 		// neuen Commport
-		communication.send(new Message(hostname, commport, new Long(value)), commport, true);
+		communication.send(new Message(hostname, portin, new Long(value)), portin, true);
 		// kurz warten um den "nicht-Prime" numbers Zeit zu geben
 
 		if (!blocking) {
@@ -88,7 +88,7 @@ public class PrimeClient extends Thread {
 			processingTimeStart = System.currentTimeMillis();
 			while (true) {
 				// Resultat erhalten
-				message = communication.receive(commport, false, true);
+				message = communication.receive(portin, false, true);
 				// wenn ein Resultat gekommen ist dann springen wir raus
 				if (message != null) {
 					isPrime = (Boolean) message.getContent();
@@ -115,7 +115,7 @@ public class PrimeClient extends Thread {
 			System.out.println(" | p: " + (processingTimeEnd - processingTimeStart) + "(" + (pTotal / pCount) + ") ms");
 		} else {
 			processingTimeStart = System.currentTimeMillis();
-			Boolean isPrime = (Boolean) communication.receive(commport, true, true).getContent();
+			Boolean isPrime = (Boolean) communication.receive(portin, true, true).getContent();
 			processingTimeEnd = System.currentTimeMillis();
 			pTotal += (processingTimeEnd - processingTimeStart);
 			pCount++;
