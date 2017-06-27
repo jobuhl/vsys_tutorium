@@ -49,6 +49,7 @@ public class PrimeServer implements Runnable {
 	 * Method is called in the beginning to initialize new incoming connections
 	 * and give them a port.
 	 */
+
 	void listen() {
 		LOGGER.info("Listening on port " + port + " -> von Thread: " + Thread.currentThread().getName());
 

@@ -15,7 +15,7 @@ public class ProxyServer {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws Exception {
 
-		System.out.println("Starting HTTP Webserver with Pages");
+		System.out.println("Starting Proxy Webserver");
 
 		int port = 0;
 		String filename = null;
