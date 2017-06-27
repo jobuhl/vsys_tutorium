@@ -1,6 +1,5 @@
 package ex3.part2;
-import rm.requestResponse.Component;
-import rm.requestResponse.Message;
+import ex2.part4.*;
 import rm.serverAdmin.ServerAdmin;
 import rm.serverAdmin.ServerConfig;
 import java.io.IOException;

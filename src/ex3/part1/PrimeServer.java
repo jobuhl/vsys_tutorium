@@ -1,7 +1,9 @@
 package ex3.part1;
 
-import rm.requestResponse.Component;
-import rm.requestResponse.Message;
+import ex2.part4.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 import java.io.IOException;
 import java.util.HashMap;

@@ -1,11 +1,11 @@
 package ex3.part1;
 
-import rm.requestResponse.Component;
-import rm.requestResponse.Message;
+import ex2.part4.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
 import java.util.Map;
 
 public class PrimeClient{
@@ -18,7 +18,7 @@ public class PrimeClient{
     private Component communication;
     private String hostname;
     private int port;
-    private int portin;
+    private int  portin;
     private boolean synchronisiert = true;
     private static boolean nebenlaeufig = true;
     private long initialValue, count;
@@ -56,7 +56,7 @@ public class PrimeClient{
 
     public void processNumber(long value) throws IOException, ClassNotFoundException {
         communicationTimeStart = System.currentTimeMillis();
-        communication.send(new Message(hostname, portin, new Long(value)), port, false);
+        communication.send(new Message(hostname, portin, new Long(value)), portin, false);
         System.out.println(value + ": ");
         Map<String, String> receivedData = (Map<String, String>) communication.receive(portin, true, true).getContent();
         System.out.println(generateOutputMessage(receivedData));
