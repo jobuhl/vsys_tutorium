@@ -55,6 +55,8 @@ public class PrimeServer {
                 boolean isPrime = primeService((Long) this.message.getContent());
                 processingTime = System.currentTimeMillis() - processingTimeStart;
 
+
+                //sendet bei prime die werte für processing und waiting time
                 Map<String, String> messageToSend = new HashMap<String, String>();
                 messageToSend.put("isprime", Boolean.toString(isPrime));
                 messageToSend.put("p", Long.toString(processingTime));

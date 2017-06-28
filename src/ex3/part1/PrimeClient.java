@@ -94,6 +94,8 @@ public class PrimeClient{
 
     // ausgabe der Zeit
     public String generateOutputMessage(Map<String, String> receivedData) {
+
+        // holt Schlüsselwert
         long p = Long.parseLong(receivedData.get("p"));
         long w = Long.parseLong(receivedData.get("w"));
         long c = (System.currentTimeMillis() - communicationTimeStart) - p - w;
@@ -102,16 +104,18 @@ public class PrimeClient{
         this.timeCounter.addProcessingTime(p);
         this.timeCounter.addWaitingTime(w);
 
-        //Methode in TimeCounter
+        //Methode in TimeCounter die alle werte holt
         Map<String, Long> avgs = this.timeCounter.getAverages();
+
+        //holt den Schlüssel zu p w c
         long pAvg = avgs.get("pt");
         long wAvg = avgs.get("wt");
         long cAvg = avgs.get("ct");
 
         String outputMsg = "\n"+
-                "p: " + p + "ms | (" + pAvg + ")\n" +
-                            "w: " + w + "ms | (" + wAvg + ")\n" +
-                            "c: " + c + "ms | (" + cAvg + ")\n" +
+                "p: " + p + "ms | (" + pAvg + ") ms +\n" +
+                            "w: " + w + "ms | (" + wAvg + ") ms \n" +
+                            "c: " + c + "ms | (" + cAvg + ") ms \n" +
                            "isprime: " + receivedData.get("isprime") + "\n";
 
         return outputMsg;
