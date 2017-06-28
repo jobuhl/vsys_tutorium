@@ -23,7 +23,7 @@ public class LoadBalancer {
 
     public static void main(String[] args) {
         try {
-            serverAdmin = new ServerAdmin("/Users/robert/FH/vsys/Aufgabenblatt_3/src/part2/config.txt");
+            serverAdmin = new ServerAdmin("/Users/Jojo/Library/Mobile Documents/com~apple~CloudDocs/htwg/sem5/VSYS/vsys_tutorium/src/ex3/part2/config.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }

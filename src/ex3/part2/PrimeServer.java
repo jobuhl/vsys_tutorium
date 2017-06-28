@@ -110,12 +110,16 @@ public class PrimeServer {
         int port = 0;
         String input;
 
+        // erwartet Porteingabe
         System.out.println("Port >");
         Scanner s = new Scanner(System.in);
         port = s.nextInt();
+
+        // fixe anzahl die immer läuft oder cached die laufen wenn benötigt
         System.out.println("pool [1 = fixed || 0 = cached] >");
         int pool = s.nextInt();
 
+        //config für den pool
         if(pool == 1) {
             System.out.println("pool size >");
             threadPool = Executors.newFixedThreadPool(s.nextInt());
