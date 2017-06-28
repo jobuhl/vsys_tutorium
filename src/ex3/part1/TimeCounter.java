@@ -29,6 +29,7 @@ public class TimeCounter {
         waitingTimes.add(time);
     }
 
+    //holt die jeweiligen werde aus der Map
     public Map<String, Long> getAverages(){
         Map<String, Long> averages = new HashMap<String, Long>();
         averages.put("wt", this.calculateAvarage(this.waitingTimes));
@@ -37,6 +38,7 @@ public class TimeCounter {
         return averages;
     }
 
+    // berechnet die wartezeit
     private Long calculateAvarage(ArrayList<Long> times) {
         long sum = 0;
         for (Long time: times) {
